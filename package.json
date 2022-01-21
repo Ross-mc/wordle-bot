@@ -1,0 +1,16 @@
+{
+  "name": "wordle-bot",
+  "version": "1.0.0",
+  "description": "A simple bot to play wordle without cheating",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "author": "Ross McIntyre",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.2.0",
+    "jest": "^27.4.7"
+  }
+}
