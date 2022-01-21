@@ -1,8 +1,8 @@
 const { VALID_WORDS } = require("../words/getValidWords");
 
-const currentWords = [...VALID_WORDS];
+let currentWords = [...VALID_WORDS];
 
-const gameStatus = {
+let gameStatus = {
   '0': '',
   '1': '',
   '2': '',
@@ -18,7 +18,7 @@ const guess = (targetWord) => {
   if (randomGuess === targetWord){
     return true
   }
-
+  processIncorrectGuess()
   return false
 }
 
@@ -29,13 +29,54 @@ const processIncorrectGuess = (targetWord, guessedWord) => {
       gameStatus[i] = currentLetter
     }
   }
+  removeInvalidWords()
 }
 
+const removeInvalidWords = () => {
+  currentWords = currentWords.filter(word => {
+    //loop through the word
+    //if the current letter does not match gamestatus letter return false
+    //also if the word contains a bad letter return false
+    //also if the word does not contain the misplaced letters
+    for (const letter of gameStatus.misplacedLetters){
+      if (!word.includes(letter)){
+        return false
+      }
+    }
+    for (let i = 0; i<word.length; i++){
+      const currentLetter = word[i];
+      if (gameStatus.badLetters.includes(currentLetter)){
+        return false
+      }
+      if (!gameStatus[i]){
+        continue
+      }
+      if (gameStatus[i] !== currentLetter){
+        return false
+      }
+    }
+  })
+}
 const getCurrentGameStatus = () => {
   return gameStatus
 }
+
+const resetGame = () => {
+  gameStatus = {
+    '0': '',
+    '1': '',
+    '2': '',
+    '3': '',
+    '4': '',
+    badLetters: [],
+    misplacedLetters: []
+  }
+}
+
 module.exports = {
   guess,
   processIncorrectGuess,
-  getCurrentGameStatus
+  getCurrentGameStatus,
+  resetGame,
+  currentWords
 }

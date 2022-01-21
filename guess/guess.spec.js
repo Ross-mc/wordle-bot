@@ -1,4 +1,4 @@
-const { guess, getCurrentGameStatus, processIncorrectGuess } = require("./guess");
+const { guess, getCurrentGameStatus, processIncorrectGuess, resetGame, currentWords } = require("./guess");
 
 jest.mock('fs');
 
@@ -8,6 +8,7 @@ beforeEach(() => {
 
 afterEach(() => {
   jest.spyOn(global.Math, 'floor').mockRestore();
+  resetGame()
 })
 
 describe('guess.js', () => {
@@ -48,5 +49,65 @@ describe('guess.js', () => {
       misplacedLetters: []
     }
     expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
+  })
+
+  
+  it('processIncorrectGuess should correctly modify gameStatus when given misplaced letters', () => {
+
+    processIncorrectGuess('arise', 'route')
+
+    const afterGuessGameStatus = {
+      '0': '',
+      '1': '',
+      '2': '',
+      '3': '',
+      '4': 'e',
+      badLetters: ['o', 'u', 't'],
+      misplacedLetters: ['r']
+    }
+    expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
+  })
+
+  it('processIncorrectGuess should remove misplaced letters after they have been correctly place', () => {
+
+    processIncorrectGuess('arise', 'route')
+
+    processIncorrectGuess('arise', 'price')
+
+    const afterGuessGameStatus = {
+      '0': '',
+      '1': 'r',
+      '2': 'i',
+      '3': '',
+      '4': 'e',
+      badLetters: ['o', 'u', 't', 'p', 'c'],
+      misplacedLetters: []
+    }
+    expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
+  })
+
+  it('processIncorrectGuess should remove misplaced letters after they have been correctly place', () => {
+
+    processIncorrectGuess('arise', 'route')
+
+    processIncorrectGuess('arise', 'price')
+
+    const afterGuessGameStatus = {
+      '0': '',
+      '1': 'r',
+      '2': 'i',
+      '3': '',
+      '4': 'e',
+      badLetters: ['o', 'u', 't', 'p', 'c'],
+      misplacedLetters: []
+    }
+    expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
+  })
+  it('removeInvalidWords should remove invalid words', () => {
+
+    processIncorrectGuess('words', 'cords')
+
+    const afterGuessValidWords = ['words']
+    expect(afterGuessValidWords).toEqual(currentWords);
   })
 })
