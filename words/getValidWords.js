@@ -10,5 +10,6 @@ const VALID_WORDS = getValidWords();
 Object.freeze(VALID_WORDS);
 
 module.exports = {
-  VALID_WORDS
+  VALID_WORDS,
+  getValidWords
 }

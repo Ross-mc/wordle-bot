@@ -24,7 +24,6 @@ const isWordValid = (word) => {
   if (word.length !== 5){
     return false
   }
-
   return VALID_WORDS.includes(word)
 }
 
