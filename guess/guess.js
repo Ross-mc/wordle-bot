@@ -47,9 +47,6 @@ const removeInvalidWords = () => {
     //also if the word contains a bad letter return false
     //also if the word does not contain the misplaced letters
 
-    console.info(word);
-    console.info(gameStatus)
-
     for (const letter of gameStatus.misplacedLetters){
       if (!word.includes(letter)){
         return false
