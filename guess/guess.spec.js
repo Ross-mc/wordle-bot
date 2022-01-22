@@ -1,4 +1,4 @@
-const { guess, getCurrentGameStatus, processIncorrectGuess, resetGame, currentWords } = require("./guess");
+const { guess, getCurrentGameStatus, processIncorrectGuess, resetGame, removeInvalidWords} = require("./guess");
 
 jest.mock('fs');
 
@@ -8,7 +8,7 @@ beforeEach(() => {
 
 afterEach(() => {
   jest.spyOn(global.Math, 'floor').mockRestore();
-  resetGame()
+  resetGame();
 })
 
 describe('guess.js', () => {
@@ -91,6 +91,7 @@ describe('guess.js', () => {
     processIncorrectGuess('words', 'cords')
 
     const afterGuessValidWords = ['words']
-    expect(afterGuessValidWords).toEqual(currentWords);
+    const result = removeInvalidWords(["hello", "valid", "words"], getCurrentGameStatus())
+    expect(result).toEqual(afterGuessValidWords);
   })
 })
