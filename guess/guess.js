@@ -18,7 +18,7 @@ const guess = (targetWord) => {
   if (randomGuess === targetWord){
     return true
   }
-  processIncorrectGuess()
+  processIncorrectGuess(targetWord, randomGuess)
   return false
 }
 
@@ -27,6 +27,14 @@ const processIncorrectGuess = (targetWord, guessedWord) => {
     const currentLetter = guessedWord[i]
     if (targetWord[i] === currentLetter){
       gameStatus[i] = currentLetter
+      const idx = gameStatus.misplacedLetters.indexOf(currentLetter)
+      if (idx !== -1){
+        gameStatus.misplacedLetters.splice(idx, 1)
+      }
+    } else if (targetWord.includes(currentLetter)) {
+      gameStatus.misplacedLetters.push(currentLetter)
+    } else if (!gameStatus.badLetters.includes(currentLetter)) {
+      gameStatus.badLetters.push(currentLetter)
     }
   }
   removeInvalidWords()
@@ -38,6 +46,10 @@ const removeInvalidWords = () => {
     //if the current letter does not match gamestatus letter return false
     //also if the word contains a bad letter return false
     //also if the word does not contain the misplaced letters
+
+    console.info(word);
+    console.info(gameStatus)
+
     for (const letter of gameStatus.misplacedLetters){
       if (!word.includes(letter)){
         return false

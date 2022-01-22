@@ -37,16 +37,16 @@ describe('guess.js', () => {
 
     expect(startGameStatus).toEqual(getCurrentGameStatus());
 
-    processIncorrectGuess('mocks', 'books')
+    processIncorrectGuess('earth', 'baths')
 
     const afterGuessGameStatus = {
       '0': '',
-      '1': 'o',
+      '1': 'a',
       '2': '',
-      '3': 'k',
-      '4': 's',
-      badLetters: ['m', 'c'],
-      misplacedLetters: []
+      '3': '',
+      '4': '',
+      badLetters: ['b', 's'],
+      misplacedLetters: ['t','h']
     }
     expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
   })
@@ -68,7 +68,7 @@ describe('guess.js', () => {
     expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
   })
 
-  it('processIncorrectGuess should remove misplaced letters after they have been correctly place', () => {
+  it('processIncorrectGuess should remove misplaced letters after they have been correctly placed', () => {
 
     processIncorrectGuess('arise', 'route')
 
@@ -86,23 +86,6 @@ describe('guess.js', () => {
     expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
   })
 
-  it('processIncorrectGuess should remove misplaced letters after they have been correctly place', () => {
-
-    processIncorrectGuess('arise', 'route')
-
-    processIncorrectGuess('arise', 'price')
-
-    const afterGuessGameStatus = {
-      '0': '',
-      '1': 'r',
-      '2': 'i',
-      '3': '',
-      '4': 'e',
-      badLetters: ['o', 'u', 't', 'p', 'c'],
-      misplacedLetters: []
-    }
-    expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
-  })
   it('removeInvalidWords should remove invalid words', () => {
 
     processIncorrectGuess('words', 'cords')
