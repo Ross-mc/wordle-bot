@@ -15,6 +15,7 @@ let gameStatus = {
 const guess = (targetWord) => {
   const randomIdx = Math.floor(Math.random() * currentWords.length);
   const randomGuess = currentWords[randomIdx];
+  console.log(`The random guess was ${randomGuess}`)
   if (randomGuess === targetWord){
     return true
   }
@@ -37,35 +38,26 @@ const processIncorrectGuess = (targetWord, guessedWord) => {
       gameStatus.badLetters.push(currentLetter)
     }
   }
-  currentLetters = removeInvalidWords(currentWords, gameStatus)
+  currentWords = removeInvalidWords(currentWords, gameStatus)
 }
 
 const removeInvalidWords = (currentWords, gameStatus) => {
 
   return currentWords.filter(word => {
-    //loop through the word
-    //if the current letter does not match gamestatus letter return false
-    //also if the word contains a bad letter return false
-    //also if the word does not contain the misplaced letters
-    console.info(word)
     for (const letter of gameStatus.misplacedLetters){
       if (!word.includes(letter)){
-        console.info('insinde misplaced letters if')
         return false
       }
     }
     for (let i = 0; i<word.length; i++){
       const currentLetter = word[i];
       if (gameStatus.badLetters.includes(currentLetter)){
-        console.info('inside badletters if')
         return false
       }
       if (!gameStatus[i]){
-        console.info('inside empty letter if')
         continue
       }
       if (gameStatus[i] !== currentLetter){
-        console.info('inside current letter if')
         return false
       }
     }
