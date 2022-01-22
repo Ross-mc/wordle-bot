@@ -14,7 +14,7 @@ Clone the repo. `npm i`
 
 ## Run
 
-`npm run start`
+To run the bot run `npm run start`. The game will start and ask you to enter a word. It must be a 5 letter word within the wordle dictionary.
 
 ## Test
 
