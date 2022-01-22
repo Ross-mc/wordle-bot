@@ -15,3 +15,7 @@ Clone the repo. `npm i`
 ## Run
 
 `npm run start`
+
+## Test
+
+`npm test`
