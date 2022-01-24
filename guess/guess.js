@@ -44,20 +44,16 @@ const processIncorrectGuess = (targetWord, guessedWord) => {
 const removeInvalidWords = (currentWords, gameStatus) => {
 
   return currentWords.filter(word => {
-    for (const letter of gameStatus.misplacedLetters){
-      if (!word.includes(letter)){
-        return false
-      }
-    }
+    filterWordIfDoesNotIncludeMisplacedLetter(word)
     for (let i = 0; i<word.length; i++){
-      const currentLetter = word[i];
-      if (gameStatus.badLetters.includes(currentLetter)){
+      const currentLetterOfPotentialWord = word[i];
+      if (gameStatus.badLetters.includes(currentLetterOfPotentialWord)){
         return false
       }
-      if (!gameStatus[i]){
+      if (isLetterUnknown(gameStatus[i])){
         continue
       }
-      if (gameStatus[i] !== currentLetter){
+      if (!isCurrentLetterAMatchForKnownLetter(gameStatus[i], currentLetterOfPotentialWord)){
         return false
       }
     }
@@ -65,6 +61,20 @@ const removeInvalidWords = (currentWords, gameStatus) => {
   })
   
 }
+
+const isLetterUnknown = (letter) => letter.length === 0
+
+const isCurrentLetterAMatchForKnownLetter = (knownLetter, currentLetter) => knownLetter === currentLetter
+
+
+const filterWordIfDoesNotIncludeMisplacedLetter = (word) => {
+  for (const letter of gameStatus.misplacedLetters){
+    if (!word.includes(letter)){
+      return false
+    }
+  }
+}
+
 const getCurrentGameStatus = () => {
   return gameStatus
 }
