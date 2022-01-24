@@ -9,7 +9,7 @@ let gameStatus = {
   '3': '',
   '4': '',
   badLetters: [],
-  misplacedLetters: []
+  misplacedLetters: {}
 }
 
 const guess = (targetWord) => {
@@ -29,15 +29,19 @@ const processIncorrectGuess = (targetWord, guessedWord) => {
     if (targetWord[i] === currentLetter){
       setCorrectlyPlacedLetter(i, currentLetter)
     } else {
-      updateMisplacedAndBadLetters(targetWord, currentLetter)
+      updateMisplacedAndBadLetters(targetWord, currentLetter, i.toString())
     }
   }
   currentWords = removeInvalidWords(currentWords, gameStatus)
 }
 
-const updateMisplacedAndBadLetters = (targetWord, currentLetter) => {
+const updateMisplacedAndBadLetters = (targetWord, currentLetter, position) => {
   if (targetWord.includes(currentLetter)) {
-    gameStatus.misplacedLetters.push(currentLetter)
+    if (gameStatus.misplacedLetters[currentLetter]){
+      gameStatus.misplacedLetters[currentLetter].push(position)
+    } else {
+      gameStatus.misplacedLetters[currentLetter] = [position]
+    }
   } else if (!gameStatus.badLetters.includes(currentLetter)) {
     gameStatus.badLetters.push(currentLetter)
   }
@@ -45,16 +49,15 @@ const updateMisplacedAndBadLetters = (targetWord, currentLetter) => {
 
 const setCorrectlyPlacedLetter = (position,letter) => {
   gameStatus[position] = letter
-  const idx = gameStatus.misplacedLetters.indexOf(letter)
-  if (idx !== -1){
-    gameStatus.misplacedLetters.splice(idx, 1)
-  }
+  gameStatus.misplacedLetters[letter] = undefined
 }
 
 const removeInvalidWords = (currentWords, gameStatus) => {
 
   return currentWords.filter(word => {
-    filterWordIfDoesNotIncludeMisplacedLetter(word)
+    if (filterWordIfDoesNotIncludeMisplacedLetter(word)){
+      return false
+    }
     for (let i = 0; i<word.length; i++){
       const currentLetterOfPotentialWord = word[i];
       if (gameStatus.badLetters.includes(currentLetterOfPotentialWord)){
@@ -78,10 +81,19 @@ const isCurrentLetterAMatchForKnownLetter = (knownLetter, currentLetter) => know
 
 
 const filterWordIfDoesNotIncludeMisplacedLetter = (word) => {
-  for (const letter of gameStatus.misplacedLetters){
+  for (const letter in gameStatus.misplacedLetters){
     if (!word.includes(letter)){
-      return false
+      return true
     }
+    const invalidPositions = gameStatus.misplacedLetters[letter];
+    if (invalidPositions){
+      for (const position of invalidPositions){
+        if (word[position] === letter){
+          return true
+        }
+      }
+    }
+
   }
 }
 
@@ -97,7 +109,7 @@ const resetGame = () => {
     '3': '',
     '4': '',
     badLetters: [],
-    misplacedLetters: []
+    misplacedLetters: {}
   }
 }
 

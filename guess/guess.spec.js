@@ -32,7 +32,7 @@ describe('guess.js', () => {
       '3': '',
       '4': '',
       badLetters: [],
-      misplacedLetters: []
+      misplacedLetters: {}
     }
 
     expect(startGameStatus).toEqual(getCurrentGameStatus());
@@ -46,7 +46,10 @@ describe('guess.js', () => {
       '3': '',
       '4': '',
       badLetters: ['b', 's'],
-      misplacedLetters: ['t','h']
+      misplacedLetters: {
+        't': ['2'],
+        'h': ['3'],
+      }
     }
     expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
   })
@@ -63,7 +66,9 @@ describe('guess.js', () => {
       '3': '',
       '4': 'e',
       badLetters: ['o', 'u', 't'],
-      misplacedLetters: ['r']
+      misplacedLetters: {
+        'r': ['0']
+      }
     }
     expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
   })
@@ -81,7 +86,7 @@ describe('guess.js', () => {
       '3': '',
       '4': 'e',
       badLetters: ['o', 'u', 't', 'p', 'c'],
-      misplacedLetters: []
+      misplacedLetters: {}
     }
     expect(afterGuessGameStatus).toEqual(getCurrentGameStatus());
   })
@@ -92,6 +97,16 @@ describe('guess.js', () => {
 
     const afterGuessValidWords = ['words']
     const result = removeInvalidWords(["hello", "valid", "words"], getCurrentGameStatus())
+    expect(result).toEqual(afterGuessValidWords);
+  })
+
+  it('removeInvalidWords should remove words where at least one misplace letter is in the wrong spot', () => {
+
+    processIncorrectGuess('words', 'dwors')
+    processIncorrectGuess('words', 'dwors')
+
+    const afterGuessValidWords = ['words']
+    const result = removeInvalidWords(["hello", "valid", "words", 'dwors'], getCurrentGameStatus())
     expect(result).toEqual(afterGuessValidWords);
   })
 })
