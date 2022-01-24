@@ -27,18 +27,28 @@ const processIncorrectGuess = (targetWord, guessedWord) => {
   for (let i = 0; i<guessedWord.length; i++){
     const currentLetter = guessedWord[i]
     if (targetWord[i] === currentLetter){
-      gameStatus[i] = currentLetter
-      const idx = gameStatus.misplacedLetters.indexOf(currentLetter)
-      if (idx !== -1){
-        gameStatus.misplacedLetters.splice(idx, 1)
-      }
-    } else if (targetWord.includes(currentLetter)) {
-      gameStatus.misplacedLetters.push(currentLetter)
-    } else if (!gameStatus.badLetters.includes(currentLetter)) {
-      gameStatus.badLetters.push(currentLetter)
+      setCorrectlyPlacedLetter(i, currentLetter)
+    } else {
+      updateMisplacedAndBadLetters(targetWord, currentLetter)
     }
   }
   currentWords = removeInvalidWords(currentWords, gameStatus)
+}
+
+const updateMisplacedAndBadLetters = (targetWord, currentLetter) => {
+  if (targetWord.includes(currentLetter)) {
+    gameStatus.misplacedLetters.push(currentLetter)
+  } else if (!gameStatus.badLetters.includes(currentLetter)) {
+    gameStatus.badLetters.push(currentLetter)
+  }
+}
+
+const setCorrectlyPlacedLetter = (position,letter) => {
+  gameStatus[position] = letter
+  const idx = gameStatus.misplacedLetters.indexOf(letter)
+  if (idx !== -1){
+    gameStatus.misplacedLetters.splice(idx, 1)
+  }
 }
 
 const removeInvalidWords = (currentWords, gameStatus) => {
