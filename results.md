@@ -14,3 +14,4 @@ Some sample results from V1 of wordle bot:
   - 21/01/2022 - prick - 5 attempts
   - 22/01/2022 - wince - 4 attempts
   - 23/01/2022 - crimp - 5 attempts
+  - 24/01/2022 - knoll - 6 attempts
