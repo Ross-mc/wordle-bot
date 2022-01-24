@@ -1,9 +1,10 @@
-const inquirer = jest.createMockFromModule('inquirer');
+const inquirer = jest.createMockFromModule("inquirer");
 
-const prompt = () => Promise.resolve({
-  word: "hello"
-});
+const prompt = () =>
+  Promise.resolve({
+    word: "hello",
+  });
 
-inquirer.prompt = prompt
+inquirer.prompt = prompt;
 
-module.exports = inquirer
+module.exports = inquirer;

@@ -1,12 +1,12 @@
-'use strict';
+"use strict";
 
-const path = require('path');
+const path = require("path");
 
-const fs = jest.createMockFromModule('fs');
+const fs = jest.createMockFromModule("fs");
 
 function readFileSync() {
-  const mockWords = ["hello", "valid", "words"]
-  return JSON.stringify(mockWords)
+  const mockWords = ["hello", "valid", "words"];
+  return JSON.stringify(mockWords);
 }
 
 fs.readFileSync = readFileSync;
