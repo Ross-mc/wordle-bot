@@ -33,3 +33,4 @@ Some sample results from V2 of wordle bot to compare with the above:
 - 22/01/2022 - wince - 5 attempts
 - 23/01/2022 - crimp - 6 attempts
 - 24/01/2022 - knoll - 4 attempts
+- 25/01/2022 - sugar - 4 attempts
