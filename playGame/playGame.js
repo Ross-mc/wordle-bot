@@ -1,4 +1,4 @@
-const { guess } = require("../guess/guess");
+const { guess, resetGame } = require("../guess/guess");
 
 const playGame = (targetWord) => {
   let guesses = 1;
@@ -9,6 +9,8 @@ const playGame = (targetWord) => {
     guesses++;
     logResult(successfulGuess, guesses);
   }
+  resetGame();
+  return successfulGuess ? guesses : -1;
 };
 
 const logResult = (successfulGuess, guesses) =>
@@ -16,6 +18,8 @@ const logResult = (successfulGuess, guesses) =>
     ? console.log(`Wordle-bot got the word in ${guesses} attempts`)
     : console.log(`Wordle-bot has had ${guesses} attempts`);
 
-module.exports = {
+const game = {
   playGame,
 };
+
+module.exports = game;

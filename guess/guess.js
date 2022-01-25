@@ -113,6 +113,7 @@ const resetGame = () => {
     badLetters: [],
     misplacedLetters: {},
   };
+  currentWords = [...VALID_WORDS];
 };
 
 module.exports = {

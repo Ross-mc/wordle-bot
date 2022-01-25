@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node index.js"
+    "start": "node index.js",
+    "benchmark": "node ./benchmarking/benchmark.js"
   },
   "author": "Ross McIntyre",
   "license": "ISC",
