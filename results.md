@@ -49,3 +49,11 @@ Some sample results from V2 of wordle bot to compare with the above:
 - 25/01/2022 - sugar - 4 attempts
 
 A benchmark run of all 12972 valid wordle words resulted in 10476 successful games (a success rate of 80.8%). Successful games had an average of 4.6 guesses.
+
+## V3
+
+V3 has weighting attached to each letter based on its popularity in the English language and weights each word according to the letters in the word.
+
+A benchmark run of all 12972 valid wordle words resulted in 10507 successful games (a success rate of 81%). Successful games had an average of 4.6 guesses.
+
+This is a much smaller improvement that I anticipated and the bot is *much* slower, taking around 10 minutes to run all 12972 words as opposed to around 1 minute for V2. I suspect this is due to how I implemented the weighting of each word (not the letters) and have thoughts on how to improve this.
