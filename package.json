@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "node index.js",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "benchmark": "node ./benchmarking/benchmark.js"
   },
   "author": "Ross McIntyre",
   "license": "ISC",
