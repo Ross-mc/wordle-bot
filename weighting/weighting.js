@@ -22,10 +22,10 @@ const weightWord = (word) => {
   };
 };
 
-const produceArrayWithWordsMultipledByWeight = (currentWords, weightedWords) => {
+const produceArrayWithWordsMultipledByWeight = (currentWords, wordWeights) => {
   const multipliedWords = [];
   for (const word of currentWords){
-    const {weight} = weightedWords[word];
+    const {weight} = wordWeights[word];
     const arr = Array(weight);
     arr.fill(word);
     multipliedWords.push(...arr);
