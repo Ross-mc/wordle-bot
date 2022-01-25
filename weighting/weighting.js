@@ -1,14 +1,13 @@
 const { letterWeights } = require("./weights");
 
 const produceWeightedWords = (wordsArr) => {
-  return wordsArr.reduce((weightedWordObj, word) => {
-    return {
-      ...weightedWordObj,
-      [word]: {
-        ...weightWord(word)
-      }
+  const weightedWordObj = {};
+  for (const word of wordsArr){
+    weightedWordObj[word] = {
+      ...weightWord(word)
     }
-  },{});
+  }
+  return weightedWordObj
 };
 
 const weightWord = (word) => {
