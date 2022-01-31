@@ -9,7 +9,7 @@ const {
 jest.mock("fs");
 
 beforeEach(() => {
-  jest.spyOn(global.Math, "floor").mockReturnValue(343);
+  jest.spyOn(global.Math, "floor").mockReturnValue(1);
 });
 
 afterEach(() => {
@@ -19,7 +19,7 @@ afterEach(() => {
 
 describe("guess.js", () => {
   it("should return true if the word is correct", () => {
-    const result = guess("valid");
+    const result = guess("hello");
     expect(result).toBeTruthy();
   });
 
