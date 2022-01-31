@@ -47,5 +47,11 @@ Some sample results from V2 of wordle bot to compare with the above:
 - 23/01/2022 - crimp - 6 attempts
 - 24/01/2022 - knoll - 4 attempts
 - 25/01/2022 - sugar - 4 attempts
+- 26/01/2022 - whack - 4 attempts
+- 27/01/2022 - mount - 4 attempts
+- 28/01/2022 - perky - 3 attempts
+- 29/01/2022 - could - 4 attempts
+- 30/01/2022 - wrung - 5 attempts
+- 31/01/2022 - light - 5 attempts
 
 A benchmark run of all 12972 valid wordle words resulted in 10476 successful games (a success rate of 80.8%). Successful games had an average of 4.6 guesses.
