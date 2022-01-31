@@ -2,37 +2,29 @@ const { letterWeights } = require("./weights");
 
 const produceWeightedWords = (wordsArr) => {
   const weightedWordObj = {};
-  for (const word of wordsArr){
+  let mostRecentWeight = 0;
+  for (const word of wordsArr) {
     weightedWordObj[word] = {
-      ...weightWord(word)
-    }
+      ...weightWord(word, mostRecentWeight),
+    };
+    mostRecentWeight = weightedWordObj[word].weightEnd;
   }
-  return weightedWordObj
+  return { weightedWordObj, endWeight: mostRecentWeight };
 };
 
-const weightWord = (word) => {
+const weightWord = (word, currCount) => {
   let weight = 0;
   for (const letter of word) {
     weight += letterWeights[letter];
   }
+  weightEnd = weight + currCount;
   return {
     word,
-    weight,
+    weightEnd,
+    weightStart: currCount,
   };
 };
 
-const produceArrayWithWordsMultipledByWeight = (currentWords, wordWeights) => {
-  const multipliedWords = [];
-  for (const word of currentWords){
-    const {weight} = wordWeights[word];
-    const arr = Array(weight);
-    arr.fill(word);
-    multipliedWords.push(...arr);
-  }
-  return multipliedWords
-}
-
 module.exports = {
   produceWeightedWords,
-  produceArrayWithWordsMultipledByWeight
 };

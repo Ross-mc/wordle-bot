@@ -62,7 +62,7 @@ V3 has weighting attached to each letter based on its popularity in the English 
 
 A benchmark run of all 12972 valid wordle words resulted in 10507 successful games (a success rate of 81%). Successful games had an average of 4.6 guesses.
 
-This is a much smaller improvement that I anticipated and the bot is *much* slower, taking around 10 minutes to run all 12972 words as opposed to around 1 minute for V2. I suspect this is due to how I implemented the weighting of each word (not the letters) and have thoughts on how to improve this.
+This is a much smaller improvement that I anticipated and the bot is _much_ slower, taking around 15-20 minutes to run all 12972 words as opposed to around 1 minute for V2. I suspect this is due to how I implemented the weighting of each word (not the letters) and have thoughts on how to improve this.
 
 - 01/01/2022 - rebus - 6 attempts
 - 02/01/2022 - boost - 5 attempts
@@ -95,3 +95,18 @@ This is a much smaller improvement that I anticipated and the bot is *much* slow
 - 29/01/2022 - could - 4 attempts
 - 30/01/2022 - wrung - 4 attempts
 - 31/01/2022 - light - 5 attempts
+
+
+## v4
+
+The logic for v4 is based upon the same logic as v3, but with significant performance improvements, running all ~12,000 words in under 4 minutes as opposed to 15 with similar success rates.
+
+The logic behind v3/v4 is to do with attempting to select words that a human would more likely select due to the frequency of the letters, i.e. worlde-bot is more like to select a word with lots of e's instead of lots of z's.
+
+Benchmarking against the entire suite of valid wordle words, is therefore not a fair representation. The wordle dictionary contains many valid words that a human is very unlikely to guess such as xyltl.
+
+Therefore, I have now restricted wordle-bot to the 2315 words that will actually be used in the wordle game.
+
+This benchmark takes around 40 seconds to run with success rates generally around 90% (as high as 97% and as low as 85%).
+
+I have re-ran v2 against the same benchmark and it averaged in the low 80s-85%. This does a show an improvement from v2-v4 but there is still work to be done I feel, perhaps looking at combinations of letters or the frequency of the words themselves.

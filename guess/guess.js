@@ -1,4 +1,7 @@
-const { produceWeightedWords, produceArrayWithWordsMultipledByWeight } = require("../weighting/weighting");
+const {
+  produceWeightedWords,
+  produceArrayWithWordsMultipledByWeight,
+} = require("../weighting/weighting");
 const { VALID_WORDS } = require("../words/getValidWords");
 
 let currentWords = [...VALID_WORDS];
@@ -16,9 +19,16 @@ let gameStatus = {
 };
 
 const guess = (targetWord) => {
-  const weightedWords = produceArrayWithWordsMultipledByWeight(currentWords, WORD_WEIGHTS)
-  const randomIdx = Math.floor(Math.random() * weightedWords.length);
-  const randomGuess = weightedWords[randomIdx];
+  const weightedWords = produceWeightedWords(currentWords);
+  const randomIdx = Math.floor(Math.random() * weightedWords.endWeight);
+  let randomGuess = "";
+  for (const wordObj in weightedWords.weightedWordObj) {
+    const word = weightedWords.weightedWordObj[wordObj];
+    if (word.weightEnd > randomIdx && word.weightStart < randomIdx) {
+      randomGuess = word.word;
+      break;
+    }
+  }
   console.log(`The random guess was ${randomGuess}`);
   if (randomGuess === targetWord) {
     return true;
