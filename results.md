@@ -108,3 +108,5 @@ Benchmarking against the entire suite of valid wordle words, is therefore not a 
 Therefore, I have now restricted wordle-bot to the 2315 words that will actually be used in the wordle game.
 
 This benchmark takes around 40 seconds to run with success rates generally around 90% (as high as 97% and as low as 85%).
+
+I have re-ran v2 against the same benchmark and it averaged in the low 80s-85%. This does a show an improvement from v2-v4 but there is still work to be done I feel, perhaps looking at combinations of letters or the frequency of the words themselves.
