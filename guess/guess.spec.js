@@ -9,7 +9,7 @@ const {
 jest.mock("fs");
 
 beforeEach(() => {
-  jest.spyOn(global.Math, "floor").mockReturnValue(1);
+  jest.spyOn(global.Math, "floor").mockReturnValue(343);
 });
 
 afterEach(() => {
